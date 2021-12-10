@@ -32,9 +32,9 @@ def predict_insurance_fraud(data:InsuranceData):
     
     prediction = classifier.predict(df)
     if(prediction[0] > 0.5):
-        prediction ="Not Fraud"
-    else:
         prediction ="Fraud"
+    else:
+        prediction ="Not Fraud"
     return {
         'prediction': prediction
     }
