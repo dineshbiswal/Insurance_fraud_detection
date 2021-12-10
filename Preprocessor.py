@@ -5,13 +5,13 @@ Created on Thu Dec  9 21:32:59 2021
 
 @author: dinesh
 """
-
-Class Preprocessor():
+import pandas as pd
+class Preprocessor():
     
     def preprocess(df):
         
-        df['policy_bind_year']=df['policy_bind_date'].str.extract('(\d{4})\-').astype('int64')
-        df['incident_month']=df['incident_date'].str.extract('\d{4}\-(\d{2})').astype('int64')
+        df['policy_bind_year'] = df['policy_bind_date'].str.extract('(\d{4})\-').astype("int64")
+        df['incident_month'] = df['incident_date'].str.extract('\d{4}\-(\d{2})').astype("int64")
         df['collision_type'] = df['collision_type'].replace("?", "undocumented")
         df['police_report_available'] = df['police_report_available'].replace("?", "undocumented")
         df['property_damage'] = df['property_damage'].replace("?", "undocumented")
@@ -24,7 +24,7 @@ Class Preprocessor():
                                                        "Major Damage":2,
                                                        "Total Loss":3
                                                       }).astype("int64")
-        if(df['capital-loss']<0): 
+        if((df['capital-loss']<0.bool())):
             df['capital-loss'] = df['capital-loss']*(-1)
             
         to_drop = ['policy_bind_date','incident_date','incident_location','insured_zip','auto_model','policy_number','age','total_claim_amount','umbrella_limit']

@@ -14,7 +14,7 @@ import pickle
 import pandas as pd
 
 app = FastAPI()
-pickle_in = open("model/insurance_fruad_model.pklinsurance_fruad_model.pkl","rb")
+pickle_in = open("model/insurance_fruad_model.pkl","rb")
 classifier=pickle.load(pickle_in)
 
 @app.get('/')
@@ -25,7 +25,7 @@ def index():
 @app.post('/dopredict')
 def predict_insurance_fraud(data:InsuranceData):
     data = data.dict()
-    df = pd.DataFrame(data)
+    df = pd.DataFrame(data, index=[0])
     
     df = Preprocessor.preprocess(df)
     
