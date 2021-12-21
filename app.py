@@ -42,8 +42,8 @@ def predict_insurance_fraud(data: InsuranceData):
                  'insured_zip', 'auto_model', 'policy_number', 'age', 'total_claim_amount']
     df.drop(large_cat, axis=1, inplace=True)
     df.reset_index(inplace=True, drop=True)
-    df = preprocessor.transform(df)
 
+    df = preprocessor.transform(df)
     prediction = classifier.predict(df)
     if prediction[0] == 0:
         prediction = "Not Fraud"
